@@ -10,8 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".time.TimePickerActivity"></activity>
-        <activity android:name=".notifications.NotificationsActivity" />
+        <activity android:name=".notifications.NotificationsActivity"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,9 +18,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <receiver android:name=".notifications.NotificationReceiver" />
-        <receiver android:name=".notifications.DirectReplyReceiver" />
+        <receiver android:name=".notifications.NotificationReceiver"></receiver>
+        <receiver android:name=".notifications.DirectReplyReceiver"></receiver>
     </application>
 
 </manifest>
