@@ -1,20 +1,25 @@
 package com.titan.notifications.tutorial.notifications;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.app.RemoteInput;
 
 import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.provider.Settings;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.view.View;
 import android.widget.Button;
@@ -66,6 +71,17 @@ public class NotificationsActivity extends AppCompatActivity {
 
         @Override
         public void onClick(View arg0) {
+
+            if (!notificationManager.areNotificationsEnabled()) {
+                openNotificationSettings();
+                return;
+            }
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O &&
+                    isChannelBlocked(App.CHANNEL_1_ID)) {
+                openChannelSettings(App.CHANNEL_1_ID);
+                return;
+            }
 
             String title = editTextTitle.getText().toString();
             String message = editTextMessage.getText().toString();
@@ -348,4 +364,32 @@ public class NotificationsActivity extends AppCompatActivity {
     };
 
 
+    private void openNotificationSettings() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            Intent intent = new Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS);
+            intent.putExtra(Settings.EXTRA_APP_PACKAGE, getPackageName());
+            startActivity(intent);
+        } else {
+            Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+            intent.setData(Uri.parse("package:" + getPackageName()));
+            startActivity(intent);
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private boolean isChannelBlocked(String channelId) {
+        NotificationManager manager = getSystemService(NotificationManager.class);
+        NotificationChannel channel = manager.getNotificationChannel(channelId);
+
+        return channel != null && channel.getImportance() == NotificationManager.IMPORTANCE_NONE;
+    }
+
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void openChannelSettings(String channelId) {
+        Intent intent = new Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS);
+        intent.putExtra(Settings.EXTRA_APP_PACKAGE, getPackageName());
+        intent.putExtra(Settings.EXTRA_CHANNEL_ID, channelId);
+        startActivity(intent);
+    }
 }
