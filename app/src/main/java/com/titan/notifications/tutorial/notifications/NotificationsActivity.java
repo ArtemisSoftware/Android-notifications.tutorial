@@ -64,6 +64,8 @@ public class NotificationsActivity extends AppCompatActivity {
 
         ((Button) findViewById(R.id.btn_sendOnChannel6)).setOnClickListener(btn_sendOnChannel6_OnClickListener);
         ((Button) findViewById(R.id.btn_sendOnChannel7)).setOnClickListener(btn_sendOnChannel7_OnClickListener);
+
+        ((Button) findViewById(R.id.btn_deleteChannels)).setOnClickListener(btn_deleteChannels_OnClickListener);
     }
 
 
@@ -392,4 +394,19 @@ public class NotificationsActivity extends AppCompatActivity {
         intent.putExtra(Settings.EXTRA_CHANNEL_ID, channelId);
         startActivity(intent);
     }
+
+
+    Button.OnClickListener btn_deleteChannels_OnClickListener = new View.OnClickListener() {
+
+        @Override
+        public void onClick(View arg0) {
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                NotificationManager manager = getSystemService(NotificationManager.class);
+                manager.deleteNotificationChannel(App.CHANNEL_3_ID);
+                //manager.deleteNotificationChannelGroup(App.GROUP_1_ID);
+            }
+        }
+    };
+
 }
