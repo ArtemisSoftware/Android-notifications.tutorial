@@ -10,7 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".time.TimePickerActivity"></activity>
+        <activity android:name=".alarm.AlarmActivity"></activity>
+        <activity android:name=".time.TimePickerActivity" />
         <activity android:name=".notifications.NotificationsActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -22,6 +23,7 @@
 
         <receiver android:name=".notifications.NotificationReceiver" />
         <receiver android:name=".notifications.DirectReplyReceiver" />
+        <receiver android:name=".alarm.AlertReceiver" />
     </application>
 
 </manifest>

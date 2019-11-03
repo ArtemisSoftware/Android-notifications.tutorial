@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.titan.notifications.tutorial.alarm.AlarmActivity;
 import com.titan.notifications.tutorial.notifications.NotificationsActivity;
 import com.titan.notifications.tutorial.time.TimePickerActivity;
 
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
         ((Button) findViewById(R.id.btn_notificacao)).setOnClickListener(btn_notificacao_OnClickListener);
         ((Button) findViewById(R.id.btn_relogio)).setOnClickListener(btn_relogio_OnClickListener);
+        ((Button) findViewById(R.id.btn_alarme)).setOnClickListener(btn_alarme_OnClickListener);
     }
 
 
@@ -38,6 +40,16 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View arg0) {
 
             Intent browserIntent = new Intent(getApplicationContext(), TimePickerActivity.class);
+            startActivity(browserIntent);
+        }
+    };
+
+    Button.OnClickListener btn_alarme_OnClickListener = new View.OnClickListener() {
+
+        @Override
+        public void onClick(View arg0) {
+
+            Intent browserIntent = new Intent(getApplicationContext(), AlarmActivity.class);
             startActivity(browserIntent);
         }
     };
