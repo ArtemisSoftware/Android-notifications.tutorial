@@ -44,4 +44,11 @@
         android:layout_height="wrap_content"
         android:text="Send on Channel 4" />
 
+    <Button
+        android:id="@+id/btn_sendOnChannel5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="sendOnChannel5"
+        android:text="Send on Channel 5" />
+
 </LinearLayout>
