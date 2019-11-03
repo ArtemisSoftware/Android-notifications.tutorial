@@ -58,6 +58,7 @@ public class NotificationsActivity extends AppCompatActivity {
         ((Button) findViewById(R.id.btn_sendOnChannel4)).setOnClickListener(btn_sendOnChannel4_OnClickListener);
 
         ((Button) findViewById(R.id.btn_sendOnChannel6)).setOnClickListener(btn_sendOnChannel6_OnClickListener);
+        ((Button) findViewById(R.id.btn_sendOnChannel7)).setOnClickListener(btn_sendOnChannel7_OnClickListener);
     }
 
 
@@ -294,6 +295,57 @@ public class NotificationsActivity extends AppCompatActivity {
         }
     };
 
+
+    Button.OnClickListener btn_sendOnChannel7_OnClickListener = new View.OnClickListener() {
+
+        @Override
+        public void onClick(View arg0) {
+
+            String title1 = "Title 1";
+            String message1 = "Message 1";
+            String title2 = "Title 2";
+            String message2 = "Message 2";
+
+             Notification notification1 = new NotificationCompat.Builder(getApplicationContext(), App.CHANNEL_7_ID)
+                    .setSmallIcon(R.drawable.ic_two)
+                    .setContentTitle(title1)
+                    .setContentText(message1)
+                    .setPriority(NotificationCompat.PRIORITY_LOW)
+                     .setGroup("example_group")
+                    .build();
+
+            Notification notification2 = new NotificationCompat.Builder(getApplicationContext(), App.CHANNEL_7_ID)
+                    .setSmallIcon(R.drawable.ic_two)
+                    .setContentTitle(title2)
+                    .setContentText(message2)
+                    .setPriority(NotificationCompat.PRIORITY_LOW)
+                    .setGroup("example_group")
+                    .build();
+
+
+            Notification summaryNotification = new NotificationCompat.Builder(getApplicationContext(), App.CHANNEL_7_ID)
+                    .setSmallIcon(R.drawable.ic_reply)
+                    .setStyle(new NotificationCompat.InboxStyle()
+                        .addLine(title2 + " "+ message2)
+                        .addLine(title1 + " "+ message1)
+                        .setBigContentTitle("2 new messages")
+                        .setSummaryText("user@example.com"))
+                    .setPriority(NotificationCompat.PRIORITY_LOW)
+                    .setGroup("example_group")
+                    .setGroupAlertBehavior(NotificationCompat.GROUP_ALERT_CHILDREN)
+                    .setGroupSummary(true)
+                    .build();
+
+
+            SystemClock.sleep(2000);
+            notificationManager.notify(2, notification1);
+            SystemClock.sleep(2000);
+            notificationManager.notify(3, notification2);
+            SystemClock.sleep(2000);
+            notificationManager.notify(7, summaryNotification);
+
+        }
+    };
 
 
 }
