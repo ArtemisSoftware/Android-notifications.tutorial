@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">NotificationsTutorial</string>
+
+    <string name="audrey_hepburn">
+    Audrey Hepburn foi uma atriz e humanitária britânica. Nascida em Ixelles, Bruxelas, passou a infância entre a Bélgica, a Inglaterra e a Holanda. Em Amsterdã, estudou balé com Sonia Gaskell; posteriormente, em 1948, mudou-se para Londres, onde continuou suas aulas de dança.
+    </string>
 </resources>

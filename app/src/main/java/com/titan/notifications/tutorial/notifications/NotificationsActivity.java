@@ -7,6 +7,8 @@ import androidx.core.app.NotificationManagerCompat;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -51,10 +53,17 @@ public class NotificationsActivity extends AppCompatActivity {
             broadcastIntent.putExtra("toastMessage", message);
             PendingIntent actionIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, broadcastIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
+            Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.audrey_hepburn);
+
             Notification notification = new NotificationCompat.Builder(getApplicationContext(), App.CHANNEL_1_ID)
                     .setSmallIcon(R.drawable.ic_one)
                     .setContentTitle(title)
                     .setContentText(message)
+                    .setLargeIcon(largeIcon)
+                    .setStyle(new NotificationCompat.BigTextStyle()
+                        .bigText(getString(R.string.audrey_hepburn))
+                        .setBigContentTitle("Audrey Hepburn Bio")
+                        .setSummaryText("Atriz"))
                     .setPriority(NotificationCompat.PRIORITY_HIGH)
                     .setCategory(NotificationCompat.CATEGORY_MESSAGE)
                     .setColor(Color.BLUE)
@@ -81,6 +90,11 @@ public class NotificationsActivity extends AppCompatActivity {
                     .setSmallIcon(R.drawable.ic_two)
                     .setContentTitle(title)
                     .setContentText(message)
+                    .setStyle(new NotificationCompat.InboxStyle()
+                        .addLine("Luca Dotti")
+                        .addLine("Sean Hepburn Ferrer")
+                        .setBigContentTitle("Audrey Hepburn filhos")
+                        .setSummaryText("Familia"))
                     .setPriority(NotificationCompat.PRIORITY_LOW)
                     .build();
 
