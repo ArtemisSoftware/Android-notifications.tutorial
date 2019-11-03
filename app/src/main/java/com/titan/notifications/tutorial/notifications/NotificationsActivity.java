@@ -14,6 +14,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.view.View;
 import android.widget.Button;
@@ -55,6 +56,8 @@ public class NotificationsActivity extends AppCompatActivity {
         ((Button) findViewById(R.id.btn_sendOnChannel2)).setOnClickListener(btn_sendOnChannel2_OnClickListener);
         ((Button) findViewById(R.id.btn_sendOnChannel3)).setOnClickListener(btn_sendOnChannel3_OnClickListener);
         ((Button) findViewById(R.id.btn_sendOnChannel4)).setOnClickListener(btn_sendOnChannel4_OnClickListener);
+
+        ((Button) findViewById(R.id.btn_sendOnChannel6)).setOnClickListener(btn_sendOnChannel6_OnClickListener);
     }
 
 
@@ -249,6 +252,48 @@ public class NotificationsActivity extends AppCompatActivity {
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
         notificationManager.notify(5, notification);
     }
+
+
+
+    Button.OnClickListener btn_sendOnChannel6_OnClickListener = new View.OnClickListener() {
+
+        @Override
+        public void onClick(View arg0) {
+
+            final int progressMax = 100;
+
+            final NotificationCompat.Builder notification = new NotificationCompat.Builder(getApplicationContext(), App.CHANNEL_6_ID)
+                    .setSmallIcon(R.drawable.ic_two)
+                    .setContentTitle("Download")
+                    .setContentText("Download in progress...")
+                    .setPriority(NotificationCompat.PRIORITY_LOW)
+                    .setOngoing(true)
+                    .setOnlyAlertOnce(true)
+                    .setProgress(progressMax, 0, true);
+
+            notificationManager.notify(6, notification.build());
+
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+
+                    SystemClock.sleep(2000);
+                    for (int progress = 0; progress <= progressMax; progress += 20) {
+                        //notification.setProgress(progressMax, progress, false);
+                        //notificationManager.notify(6, notification.build());
+                        SystemClock.sleep(1000);
+                    }
+
+                    notification.setContentText("Download finished")
+                            .setProgress(0, 0, false)
+                            .setOngoing(false);
+                    notificationManager.notify(6, notification.build());
+
+                }
+            }).start();
+        }
+    };
+
 
 
 }

@@ -12,6 +12,7 @@ public class App extends Application {
     public static final String CHANNEL_3_ID = "channel3";
     public static final String CHANNEL_4_ID = "channel4";
     public static final String CHANNEL_5_ID = "channel5";
+    public static final String CHANNEL_6_ID = "channel6";
 
     @Override
     public void onCreate() {
@@ -34,8 +35,11 @@ public class App extends Application {
             NotificationChannel channel4 = new NotificationChannel(CHANNEL_4_ID, "Channel 4", NotificationManager.IMPORTANCE_LOW);
             channel2.setDescription("This is Channel 4");
 
-            NotificationChannel channel5 = new NotificationChannel(CHANNEL_5_ID, "Channel 3", NotificationManager.IMPORTANCE_HIGH);
-            channel1.setDescription("This is Channel 5");
+            NotificationChannel channel5 = new NotificationChannel(CHANNEL_5_ID, "Channel 5", NotificationManager.IMPORTANCE_HIGH);
+            channel5.setDescription("This is Channel 5");
+
+            NotificationChannel channel6 = new NotificationChannel(CHANNEL_6_ID, "Channel 6", NotificationManager.IMPORTANCE_LOW);
+            channel6.setDescription("This is Channel 6");
 
             NotificationManager manager = getSystemService(NotificationManager.class);
             manager.createNotificationChannel(channel1);
@@ -43,6 +47,8 @@ public class App extends Application {
             manager.createNotificationChannel(channel3);
             manager.createNotificationChannel(channel4);
             manager.createNotificationChannel(channel5);
+
+            manager.createNotificationChannel(channel6);
         }
     }
 
